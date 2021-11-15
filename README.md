@@ -9,22 +9,25 @@ It is a Shell Script which can build a JetBrains Server automatically.
 
 `HOW TO USE`
 
+```sh
+wget --no-check-certificate -O install.sh https://raw.githubusercontent.com/Hubert1991/JetbrainsServer/master/install.sh && chmod +x install.sh && bash install.sh
 ```
-wget --no-check-certificate -O install.sh https://raw.githubusercontent.com/yushangcl/JetbrainsServer/master/install.sh && chmod +x install.sh && bash install.sh
-```
 
- **License server http://ip:1017**
+> **License server http://ip:1026**
 
 
-If you do not want to build a server, you can use the following server activation
-
-> http://idea.itbat.cn
 
 ##### firewall
 
-iptables -I INPUT -m state —state NEW -m tcp -p tcp —dport 1018 -j ACCEPT
+```sh
+iptables -I INPUT -m state --state NEW -m tcp -p tcp —dport 1026 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp —dport 1026 -j ACCEPT
 
-iptables -I INPUT -m state —state NEW -m udp -p udp —dport 1018 -j ACCEPT
+firewall-cmd --zone=public --add-port=1026/tcp
+firewall-cmd --zone=public --add-port=1026/udp
+firewall-cmd --zone=public --add-port=1026/tcp --permanent
+firewall-cmd --zone=public --add-port=1026/udp --permanent
+```
 
 ---
 
@@ -46,7 +49,7 @@ This following JetBrains products are supported:
 - dotTrace
 - IntelliJ IDEA
 - GoLand
-- PhpStorm
+- PhpStorm ( 最新支持到 2018.2 )
 - PyCharm
 - ReSharper
 - ReSharper C++
